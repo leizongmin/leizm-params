@@ -53,7 +53,7 @@ export class ParamError extends Error {
 
 export class ErrorMessageTemplate {
   public static failedToParse(name: string, type: string, value: any): string {
-    return `[${name}] failed to parse ${type} value: ${value}`;
+    return `[${name}] failed to parse ${type} value: ${JSON.stringify(value)}`;
   }
 
   public static failedToCast(name: string, type: string, value: any): string {

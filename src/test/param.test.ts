@@ -7,8 +7,12 @@ describe("param", function() {
     expect(new $.NumberParam("a", "1234").value).to.equal(1234);
     expect(new $.NumberParam("a", 123).ok).to.equal(true);
     expect(new $.NumberParam("a", 123).fail).to.equal(false);
+    expect(new $.NumberParam("a", 123).message).to.equal("OK");
     expect(new $.NumberParam("a", "xxx").ok).to.equal(false);
     expect(new $.NumberParam("a", "xxx").fail).to.equal(true);
+    expect(new $.NumberParam("a", "xxx").message).to.equal(
+      '[a] failed to parse number value: "xxx"'
+    );
     expect(() => new $.NumberParam("a", null).value).to.throws($.ParamError);
   });
 
@@ -29,8 +33,17 @@ describe("param", function() {
       789
     ]);
     expect(new $.NumberArrayParam("a", "xxx").fail).to.equal(true);
+    expect(new $.NumberArrayParam("a", "xxx").message).to.equal(
+      '[a.0] failed to parse number value: "xxx"'
+    );
     expect(new $.NumberArrayParam("a", ["xxx"]).fail).to.equal(true);
+    expect(new $.NumberArrayParam("a", ["xxx"]).message).to.equal(
+      '[a.0] failed to parse number value: "xxx"'
+    );
     expect(new $.NumberArrayParam("a", [123, "xxx"]).fail).to.equal(true);
+    expect(new $.NumberArrayParam("a", [123, "xxx"]).message).to.equal(
+      '[a.1] failed to parse number value: "xxx"'
+    );
   });
 
   it("正确解析 String 参数", function() {
