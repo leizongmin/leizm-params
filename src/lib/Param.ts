@@ -1,6 +1,6 @@
 export class Param {
 
-  constructor(public name: string, private _success: boolean, private _errorMessage?: string) { }
+  constructor(public name: string, protected _success: boolean, protected _errorMessage?: string) { }
 
   /**
    * 获取参数的值，如果无法正确解析参数，会抛出异常
@@ -15,15 +15,22 @@ export class Param {
   /**
    * 是否解析失败
    */
-  public get isError() {
+  public get fail() {
     return !this._success;
   }
 
   /**
    * 是否解析成功
    */
-  public get isOk() {
+  public get ok() {
     return this._success;
+  }
+
+  /**
+   * 获取解析出错信息，如果正常则返回OK
+   */
+  public get message() {
+    return this._success ? 'OK' : this._errorMessage;
   }
 
 }
