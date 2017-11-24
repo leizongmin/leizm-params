@@ -21,12 +21,13 @@
 [license-image]: https://img.shields.io/npm/l/@leizm/params.svg
 
 # @leizm/params
+
 参数解析基础库
 
 ## 安装
 
 ```bash
-$ npm install @leizm/params
+npm install @leizm/params --save
 ```
 
 ## 使用方法
@@ -35,8 +36,8 @@ $ npm install @leizm/params
 import { NumberParam } from '@leizm/params';
 
 const a = new NumberParam('age', '123');
-console.log(a.isOk, a.isError, a.value);
-// => true, false, 123
+console.log(a.ok, a.fail, a.message, a.value);
+// => true false OK 123
 
 const b = new NumberParam('age', 'xyz');
 console.log(b.value);
@@ -45,7 +46,7 @@ console.log(b.value);
 
 ## 授权协议
 
-```
+```text
 MIT License
 
 Copyright (c) 2017 老雷 <leizongmin@gmail.com>
