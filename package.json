@@ -8,12 +8,13 @@
     "dist/lib"
   ],
   "scripts": {
-    "test": "mocha",
+    "test": "npm run lint && mocha",
     "test-cov": "nyc --reporter=lcov mocha && nyc report",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "clean": "rm -rf dist",
     "compile": "npm run clean && tsc",
-    "prepublish": "npm run test && npm run compile"
+    "prepublish": "npm run test && npm run compile",
+    "lint": "prettier --write 'src/**/*.ts'"
   },
   "nyc": {
     "extension": [
@@ -48,9 +49,8 @@
     "coveralls": "^2.13.3",
     "mocha": "^3.5.3",
     "nyc": "^11.3.0",
+    "prettier": "^1.8.2",
     "ts-node": "^3.3.0",
-    "tslint": "^5.8.0",
-    "tslint-config-lei": "^1.1.1",
     "typescript": "^2.6.1"
   }
 }

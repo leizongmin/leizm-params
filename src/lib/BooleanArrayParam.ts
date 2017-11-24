@@ -1,5 +1,5 @@
-import { Param, ErrorMessageTemplate } from './Param';
-import { BooleanParam } from './BooleanParam';
+import { Param, ErrorMessageTemplate } from "./Param";
+import { BooleanParam } from "./BooleanParam";
 
 interface CastResult {
   success: boolean;
@@ -20,17 +20,25 @@ function castBooleanArray(name: string, list: any[]): CastResult {
 }
 
 export class BooleanArrayParam extends Param {
-
   protected _value: boolean[];
 
   constructor(name: string, value: any) {
     const t = typeof value;
-    if (t === 'string') {
-      value = value.split(',');
-    } else if (t === 'number' || t === 'boolean' || t === 'undefined' || value === null) {
-      value = [ value ];
+    if (t === "string") {
+      value = value.split(",");
+    } else if (
+      t === "number" ||
+      t === "boolean" ||
+      t === "undefined" ||
+      value === null
+    ) {
+      value = [value];
     } else if (!Array.isArray(value)) {
-      super(name, false, ErrorMessageTemplate.failedToCast(name, 'boolean array', value));
+      super(
+        name,
+        false,
+        ErrorMessageTemplate.failedToCast(name, "boolean array", value)
+      );
       return;
     }
     const ret = castBooleanArray(name, value);
@@ -45,5 +53,4 @@ export class BooleanArrayParam extends Param {
   public get value() {
     return this._getValue() as boolean[];
   }
-
 }

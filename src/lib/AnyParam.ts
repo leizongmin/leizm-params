@@ -1,13 +1,16 @@
-import { Param, ErrorMessageTemplate } from './Param';
-import * as $ from './index';
+import { Param, ErrorMessageTemplate } from "./Param";
+import * as $ from "./index";
 
 export class AnyParam extends Param {
-
   protected _value: any;
 
   constructor(name: string, value: any) {
-    if (typeof value === 'undefined') {
-      super(name, false, ErrorMessageTemplate.failedToParse(name, 'any', value));
+    if (typeof value === "undefined") {
+      super(
+        name,
+        false,
+        ErrorMessageTemplate.failedToParse(name, "any", value)
+      );
     } else {
       super(name, true);
       this._value = value;
@@ -53,5 +56,4 @@ export class AnyParam extends Param {
   public toStringArray(): $.StringArrayParam {
     return new $.StringArrayParam(this.name, this.value);
   }
-
 }

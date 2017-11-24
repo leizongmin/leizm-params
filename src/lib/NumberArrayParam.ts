@@ -1,5 +1,5 @@
-import { Param, ErrorMessageTemplate } from './Param';
-import { NumberParam } from './NumberParam';
+import { Param, ErrorMessageTemplate } from "./Param";
+import { NumberParam } from "./NumberParam";
 
 interface CastResult {
   success: boolean;
@@ -20,13 +20,12 @@ function castNumberArray(name: string, list: any[]): CastResult {
 }
 
 export class NumberArrayParam extends Param {
-
   protected _value: number[];
 
   constructor(name: string, value: any) {
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       super(name, true);
-      this._value = [ value ];
+      this._value = [value];
     } else if (Array.isArray(value)) {
       const ret = castNumberArray(name, value);
       if (ret.success) {
@@ -35,13 +34,13 @@ export class NumberArrayParam extends Param {
       } else {
         super(name, false, ret.message);
       }
-    } else if (typeof value === 'string') {
+    } else if (typeof value === "string") {
       value = value.trim();
       if (!value) {
         super(name, true);
         this._value = [];
       } else {
-        const ret = castNumberArray(name, value.split(','));
+        const ret = castNumberArray(name, value.split(","));
         if (ret.success) {
           super(name, true);
           this._value = ret.values;
@@ -50,12 +49,15 @@ export class NumberArrayParam extends Param {
         }
       }
     } else {
-      super(name, false, ErrorMessageTemplate.failedToCast(name, 'number array', value));
+      super(
+        name,
+        false,
+        ErrorMessageTemplate.failedToCast(name, "number array", value)
+      );
     }
   }
 
   public get value() {
     return this._getValue() as number[];
   }
-
 }

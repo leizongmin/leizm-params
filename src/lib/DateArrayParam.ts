@@ -1,5 +1,5 @@
-import { Param, ErrorMessageTemplate } from './Param';
-import { DateParam } from './DateParam';
+import { Param, ErrorMessageTemplate } from "./Param";
+import { DateParam } from "./DateParam";
 
 interface CastResult {
   success: boolean;
@@ -20,16 +20,19 @@ function castDateArray(name: string, list: any[]): CastResult {
 }
 
 export class DateArrayParam extends Param {
-
   protected _value: Date[];
 
   constructor(name: string, value: any) {
-    if (typeof value === 'string') {
-      value = value.split(',');
-    } else if (typeof value === 'number' || value instanceof Date) {
-      value = [ value ];
+    if (typeof value === "string") {
+      value = value.split(",");
+    } else if (typeof value === "number" || value instanceof Date) {
+      value = [value];
     } else if (!Array.isArray(value)) {
-      super(name, false, ErrorMessageTemplate.failedToCast(name, 'Date array', value));
+      super(
+        name,
+        false,
+        ErrorMessageTemplate.failedToCast(name, "Date array", value)
+      );
       return;
     }
     const ret = castDateArray(name, value);
@@ -44,5 +47,4 @@ export class DateArrayParam extends Param {
   public get value() {
     return this._getValue() as Date[];
   }
-
 }

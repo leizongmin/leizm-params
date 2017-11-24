@@ -1,5 +1,5 @@
-import { Param } from './Param';
-import { StringParam } from './StringParam';
+import { Param } from "./Param";
+import { StringParam } from "./StringParam";
 
 interface CastResult {
   success: boolean;
@@ -20,12 +20,11 @@ function castStringArray(name: string, list: any[]): CastResult {
 }
 
 export class StringArrayParam extends Param {
-
   protected _value: string[];
 
   constructor(name: string, value: any) {
     if (!Array.isArray(value)) {
-      value = [ value ];
+      value = [value];
     }
     const ret = castStringArray(name, value);
     if (ret.success) {
@@ -39,5 +38,4 @@ export class StringArrayParam extends Param {
   public get value() {
     return this._getValue() as string[];
   }
-
 }

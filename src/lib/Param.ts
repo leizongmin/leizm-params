@@ -1,13 +1,16 @@
 export class Param {
-
-  constructor(public name: string, protected _success: boolean, protected _errorMessage?: string) { }
+  constructor(
+    public name: string,
+    protected _success: boolean,
+    protected _errorMessage?: string
+  ) {}
 
   /**
    * 获取参数的值，如果无法正确解析参数，会抛出异常
    */
   protected _getValue() {
     if (this._success) {
-      return (this as any)['_value'];
+      return (this as any)["_value"];
     }
     throw new ParamError(this.name, this._errorMessage);
   }
@@ -30,13 +33,11 @@ export class Param {
    * 获取解析出错信息，如果正常则返回OK
    */
   public get message() {
-    return this._success ? 'OK' : this._errorMessage;
+    return this._success ? "OK" : this._errorMessage;
   }
-
 }
 
 export class ParamError extends Error {
-
   /**
    * 参数名
    */
@@ -48,11 +49,9 @@ export class ParamError extends Error {
     this.message = msg;
     this.param = name;
   }
-
 }
 
 export class ErrorMessageTemplate {
-
   public static failedToParse(name: string, type: string, value: any): string {
     return `[${name}] failed to parse ${type} value: ${value}`;
   }
@@ -60,6 +59,4 @@ export class ErrorMessageTemplate {
   public static failedToCast(name: string, type: string, value: any): string {
     return `[${name}] cast to ${type} failed: ${value}`;
   }
-
 }
-
