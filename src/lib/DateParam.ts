@@ -9,7 +9,7 @@ export class DateParam extends Param {
       super(name, true);
       this._value = value;
     } else if (typeof value === 'string' || typeof value === 'number') {
-      const v = new Date(value);
+      const v = new Date(value as string);
       if (isFinite(v.getTime())) {
         super(name, true);
         this._value = v;
