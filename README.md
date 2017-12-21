@@ -22,6 +22,8 @@
 
 # @leizm/params
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/leizongmin/leizm-params.svg)](https://greenkeeper.io/)
+
 参数解析基础库
 
 ## 安装
